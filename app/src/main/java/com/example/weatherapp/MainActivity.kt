@@ -16,6 +16,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.weatherapp.ui.screens.CurrentWeather
+import com.example.weatherapp.ui.screens.DailyForecast
 import com.example.weatherapp.ui.theme.WeatherAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -24,56 +26,17 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             WeatherAppTheme {
-                Home()
-                //Hello()
+                //Current weather will act as "Home" or landing page
+                CurrentWeather()
+
+
+                //DailyForecast()
             }
         }
     }
 }
 
-@Composable
-fun Home() {
-
-    Row(horizontalArrangement = Arrangement.Start){
-        Text(
-            text = "Home!",
-            color = Color.Blue,
-            fontSize = 24.sp,
-            modifier = Modifier.padding(32.dp)
-
-        )
-
-        Text(
-            text = "Home 2!",
-            color = Color.Blue,
-            fontSize = 8.sp,
-            modifier = Modifier.padding(32.dp)
-
-        )
-
-        Text(
-            text = "Home 3!",
-            color = Color.Blue,
-            fontSize = 24.sp,
-            modifier = Modifier.padding(32.dp)
-
-        )
-    }
 
 
 
-
-}
-
-@Composable
-fun Hello() {
-    //Currently not in use
-    Text(
-        text = "Hello!",
-        color = Color.Red,
-        fontSize = 64.sp,
-        modifier = Modifier.padding(32.dp)
-
-    )
-}
 
