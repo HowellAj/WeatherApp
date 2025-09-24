@@ -26,11 +26,12 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             WeatherAppTheme {
-                //Current weather will act as "Home" or landing page
-                CurrentWeather()
+                //These are the two screens to develop, hardcode which appears for now by commenting one out
+                //Current weather will act as a "home page" or landing page
+                //CurrentWeather()
 
 
-                //DailyForecast()
+                DailyForecast()
             }
         }
     }
