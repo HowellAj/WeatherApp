@@ -2,21 +2,21 @@ package com.example.weatherapp
 import androidx.lifecycle.ViewModel
 import com.example.weatherapp.models.CurrentWeather
 import com.example.weatherapp.models.ForecastWeather
-import com.example.weatherapp.models.WeatherPack
+import com.example.weatherapp.models.Weather
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 class MainViewModel : ViewModel()
 {
-    private val _weather = MutableStateFlow(null)
+    private val _weather = MutableStateFlow<Weather?>(null)
 
     val weather =_weather.asStateFlow()
 
     init {
 
-        val weatherData = WeatherPack(
+        val weatherData = Weather(
             CurrentWeather(
-                currentStatus = "Sunny",
+                weatherStatus = "Sunny",
                 temperature = "18C",
                 precipitation = "0mm",
                 windSpeed = "10kph",
@@ -47,8 +47,8 @@ class MainViewModel : ViewModel()
                 ),
                 ForecastWeather(
                     day = 3,
-                    date = "10/10/25",
-                    weatherStatus = "Sun & Cloud",
+                    date = "10/9/25",
+                    weatherStatus = "Sunny",
                     temperature = "20C",
                     precipitation = "0mm",
                     windSpeed = "21kph",
@@ -58,14 +58,9 @@ class MainViewModel : ViewModel()
             ),
 
         )
-
-
-
+        _weather.value = weatherData;
 
     }
-
-
-
 
 
 }

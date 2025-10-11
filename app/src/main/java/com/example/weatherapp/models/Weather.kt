@@ -3,13 +3,13 @@ package com.example.weatherapp.models
 import android.R.string
 
 
-data class WeatherPack(
+data class Weather(
     val currentWeather: CurrentWeather,
     val dailyWeather: List<ForecastWeather>
 )
 
 data class CurrentWeather(
-    val currentStatus: String,
+    val weatherStatus: String,
     val temperature: String,
     val precipitation: String,
     val windSpeed: String,
