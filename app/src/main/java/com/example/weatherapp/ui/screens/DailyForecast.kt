@@ -43,37 +43,37 @@ fun DailyForecast(mainViewModel: MainViewModel) {
             Spacer(Modifier.height(48.dp))
         }
 
-        items(weatherStuff?.dailyWeather!!) { item ->
-            Text(
-                text = "Weather for ${item.date} is ${item.weatherStatus}",
-                fontSize = 28.sp
-            );
-            var imageRes = R.drawable.sun_image
-
-
-            if (item.weatherStatus == "Rain"){
-                imageRes = R.drawable.rain_image
-            } else if (item.weatherStatus == "Clouds" || item.weatherStatus == "Overcast"){
-                imageRes = R.drawable.cloudy_image
-            }
-
-            Image(
-                painter = painterResource(imageRes),
-                contentDescription = "Weather Photo"
-            )
-
-            Text(
-                text = "Temperature: ${item.temperature}\n\nPrecipitation: ${item.precipitation}\n\nHumidity: ${item.humidity}\n\nWind: ${item.windSpeed} ${item.windDirection}",
-                fontSize = 24.sp,
-            )
-            HorizontalDivider(
-                modifier = Modifier
-                    .padding(horizontal = 40.dp, vertical = 18.dp)
-                    .clip(RoundedCornerShape(50)),
-                color = Color.Blue,
-                thickness = 6.dp
-            )
-        }
+//        items(weatherStuff?.dailyWeather!!) { item ->
+//            Text(
+//                text = "Weather for ${item.date} is ${item.weatherStatus}",
+//                fontSize = 28.sp
+//            );
+//            var imageRes = R.drawable.sun_image
+//
+//
+//            if (item.weatherStatus == "Rain"){
+//                imageRes = R.drawable.rain_image
+//            } else if (item.weatherStatus == "Clouds" || item.weatherStatus == "Overcast"){
+//                imageRes = R.drawable.cloudy_image
+//            }
+//
+//            Image(
+//                painter = painterResource(imageRes),
+//                contentDescription = "Weather Photo"
+//            )
+//
+//            Text(
+//                text = "Temperature: ${item.temperature}\n\nPrecipitation: ${item.precipitation}\n\nHumidity: ${item.humidity}\n\nWind: ${item.windSpeed} ${item.windDirection}",
+//                fontSize = 24.sp,
+//            )
+//            HorizontalDivider(
+//                modifier = Modifier
+//                    .padding(horizontal = 40.dp, vertical = 18.dp)
+//                    .clip(RoundedCornerShape(50)),
+//                color = Color.Blue,
+//                thickness = 6.dp
+//            )
+//        }
 
 
 

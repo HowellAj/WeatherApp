@@ -1,10 +1,16 @@
 package com.example.weatherapp
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.weatherapp.models.CurrentWeather
 import com.example.weatherapp.models.ForecastWeather
 import com.example.weatherapp.models.Weather
+import com.example.weatherapp.services.WeatherService
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class MainViewModel : ViewModel()
 {
@@ -12,55 +18,18 @@ class MainViewModel : ViewModel()
 
     val weather =_weather.asStateFlow()
 
-    init {
+    val retrofit: Retrofit = Retrofit.Builder()
+        .baseUrl("https://api.weatherapi.com/v1/")
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
 
-        val weatherData = Weather(
-            CurrentWeather(
-                weatherStatus = "Sunny",
-                temperature = "18C",
-                precipitation = "0mm",
-                windSpeed = "10kph",
-                windDirection = "NW",
-                humidity = "12%",
-                date = "10/5/25",
-            ),
-            dailyWeather = listOf(
-                ForecastWeather(
-                    day = 1,
-                    date = "10/6/25",
-                    weatherStatus = "Rain",
-                    temperature = "16C",
-                    precipitation = "15mm",
-                    windSpeed = "15kph",
-                    windDirection = "W",
-                    humidity = "100%"
-                ),
-                ForecastWeather(
-                    day = 2,
-                    date = "10/8/25",
-                    weatherStatus = "Clouds",
-                    temperature = "18C",
-                    precipitation = "0mm",
-                    windSpeed = "8kph",
-                    windDirection = "SW",
-                    humidity = "21%"
-                ),
-                ForecastWeather(
-                    day = 3,
-                    date = "10/9/25",
-                    weatherStatus = "Sunny",
-                    temperature = "20C",
-                    precipitation = "0mm",
-                    windSpeed = "21kph",
-                    windDirection = "E",
-                    humidity = "12%"
-                ),
-            ),
+    val weatherService: WeatherService = retrofit.create(WeatherService::class.java)
 
-        )
-        _weather.value = weatherData;
-
+    fun getWeather(){
+        viewModelScope.launch {
+            val weather = weatherService.getWeather()
+            _weather.value = weather
+        }
     }
-
 
 }
