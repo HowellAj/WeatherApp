@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -12,9 +13,11 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
 import com.example.weatherapp.MainViewModel
 import com.example.weatherapp.R
 
@@ -24,7 +27,6 @@ fun CurrentWeather(mainViewModel: MainViewModel) {
 
     val weather by mainViewModel.weather.collectAsState()
 
-    mainViewModel.getWeather()
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -43,10 +45,14 @@ fun CurrentWeather(mainViewModel: MainViewModel) {
                 fontSize = 28.sp,
             )
 
-            Image(
-                painter = painterResource(R.drawable.sun_image),
-                contentDescription = "Weather Photo"
+            AsyncImage(
+                model = "https:" + weather?.current!!.condition.icon.replace("64x64","128x128"),
+                contentDescription = "Weather image",
+                modifier = Modifier.size(192.dp),
+                contentScale = ContentScale.Crop
             )
+
+
 
             Text(
                 text = "Temperature: ${weather?.current!!.tempC}\n\nPrecipitation: ${weather?.current!!.precipMM}\n\nWind: ${weather?.current!!.windKPH} ${weather?.current!!.windDirection}",

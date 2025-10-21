@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -46,6 +48,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             WeatherAppTheme {
+                mainViewModel.getWeather()
+
                 DisplayUI(mainViewModel);
             }
         }
@@ -64,8 +68,8 @@ fun DisplayUI(mainViewModel: MainViewModel) {
 
     Scaffold(
         topBar = {
-            TopAppBar(
-                colors = TopAppBarDefaults.topAppBarColors(
+            CenterAlignedTopAppBar(
+                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primaryContainer,
                     titleContentColor = MaterialTheme.colorScheme.primary
                 ),
@@ -88,11 +92,12 @@ fun DisplayUI(mainViewModel: MainViewModel) {
                     icon = {
                         Icon(
                             painter = painterResource(R.drawable.ic_action_currentweather),
-                            contentDescription = "Current"
+                            contentDescription = "Current",
+                            modifier = Modifier.size(42.dp)
                         )
                     },
                     label = {
-                        Text("Current")
+                        Text("Current", fontSize = 18.sp)
                     },
                     selected = selectedIndex == 0,
                     onClick = {
@@ -106,11 +111,12 @@ fun DisplayUI(mainViewModel: MainViewModel) {
                     icon = {
                         Icon(
                             painter = painterResource(R.drawable.ic_action_forecast),
-                            contentDescription = "Forecast"
+                            contentDescription = "Forecast",
+                            modifier = Modifier.size(42.dp)
                         )
                     },
                     label = {
-                        Text("Forecast")
+                        Text("Forecast", fontSize = 18.sp)
                     },
                     selected = selectedIndex == 1,
                     onClick = {
