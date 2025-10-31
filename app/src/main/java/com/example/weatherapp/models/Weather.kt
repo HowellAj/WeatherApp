@@ -1,12 +1,24 @@
 package com.example.weatherapp.models
 
 
+import android.graphics.Region
 import com.google.gson.annotations.SerializedName
-import java.sql.Date
+
 
 data class Weather(
+    val location: LocationData,
     val current: CurrentWeather,
     val forecast: ForecastWeather
+)
+
+data class LocationData(
+    val name: String,
+    val region: String,
+    val country: String,
+    val lat: String,
+    val long: String,
+
+
 )
 
 data class CurrentWeather(

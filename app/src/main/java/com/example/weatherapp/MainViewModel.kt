@@ -25,9 +25,15 @@ class MainViewModel : ViewModel()
 
     val weatherService: WeatherService = retrofit.create(WeatherService::class.java)
 
-    fun getWeather(){
+    fun getWeather(lnglat: String){
         viewModelScope.launch {
-            val weather = weatherService.getWeather()
+            val weather = weatherService.getWeather(
+                key = "3a3364f8034e47f48a8174727251510",
+                location = lnglat,
+                days = "3",
+                airQuality = "no",
+                alerts = "no",
+            )
             _weather.value = weather
         }
     }

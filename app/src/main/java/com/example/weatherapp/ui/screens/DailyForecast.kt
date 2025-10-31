@@ -48,7 +48,7 @@ fun DailyForecast(mainViewModel: MainViewModel) {
 
         items(weatherStuff?.forecast!!.days) { item ->
             Text(
-                text = "Weather for ${item.date} is ${item.day.condition.text}",
+                text = "${item.date} \n ${item.day.condition.text}",
                 fontSize = 28.sp
             );
 
@@ -59,11 +59,11 @@ fun DailyForecast(mainViewModel: MainViewModel) {
                 contentScale = ContentScale.Crop
             )
 
-
             Text(
                 text = "Temperature: ${item.day.avgTempC}\n\nPrecipitation: ${item.day.precipMM}MM\n\nHumidity: ${item.day.avghumidity}\n\nWind: ${item.day.windKPH}KPH",
                 fontSize = 24.sp,
             )
+
             HorizontalDivider(
                 modifier = Modifier
                     .padding(horizontal = 40.dp, vertical = 18.dp)

@@ -25,6 +25,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
@@ -60,7 +61,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             WeatherAppTheme {
-                mainViewModel.getWeather()
+                //mainViewModel.getWeather()
                 GetLocation()
                 DisplayUI(mainViewModel);
             }
@@ -100,6 +101,9 @@ class MainActivity : ComponentActivity() {
                             val coordinates = "$lat,$lng"
 
                             // call a function, like in View Model, to do something with location...
+
+                            mainViewModel.getWeather(coordinates)
+
                         }
                         else {
                             Log.i("TESTING", "Problem encountered: Location returned null")
@@ -138,6 +142,7 @@ fun DisplayUI(mainViewModel: MainViewModel) {
 
     // Store the selectedIndex in a state flow variable
     var selectedIndex by remember { mutableIntStateOf(0) }
+    val weather by mainViewModel.weather.collectAsState()
 
     Scaffold(
         topBar = {
@@ -147,7 +152,10 @@ fun DisplayUI(mainViewModel: MainViewModel) {
                     titleContentColor = MaterialTheme.colorScheme.primary
                 ),
                 title = {
-                    Text("Local Weather App")
+
+                    if (weather != null){
+                        Text(weather?.location!!.name)
+                    }
                 }
             )
         },
